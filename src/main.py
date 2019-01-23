@@ -33,7 +33,8 @@ if __name__ == "__main__":
 
     # Get cover images
     # staroot = time()
-    os.chdir(path+'data/raw/covers')
+    os.mkdir('data/covers')
+    os.chdir(path+'data/covers')
     data['cover'] = data.apply(lambda row: get_cover(row), axis=1)
     print('downloading', data.shape[0], 'book covers')
 
