@@ -9,7 +9,7 @@ warnings.filterwarnings('ignore')
 if __name__ == "__main__":
     print("Welcome to book cover recommender.")
     path = os.getcwd()[:-3]
-    print('Path: ',path,'\n',os.listdir(path+'data/raw/'))
+    print('Path: ',path,'\n',os.listdir(path+'data'))
 
     # Initialize database connection
     try:
