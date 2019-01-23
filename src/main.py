@@ -13,7 +13,7 @@ if __name__ == "__main__":
     # Initialize database connection
     try:
         # Engine: common interface to the database from SQLAlchemy
-        engine = create_engine('postgresql://postgres:capstone@67.171.19.5:5432/postgres')
+        engine = create_engine('postgresql://postgres:capstone@35.197.77.78:5432/postgres')
         print("Database found.")
     except:
         print("No database available.")
