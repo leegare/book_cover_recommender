@@ -15,7 +15,9 @@ The data is extracted from a github repo **[3]**.
 
 [1] - How to Write a Good Book Description
 https://www.ingramspark.com/blog/
+
 [2] - What Makes a Bestseller? | Jonny Geller | TEDxOxford
 https://www.youtube.com/watch?v=mD-uP2BsVy4&list=WL&index=73
+
 [3] - goodbooks-10k
 https://github.com/zygmuntz/goodbooks-10k

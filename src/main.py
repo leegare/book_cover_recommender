@@ -24,7 +24,7 @@ if __name__ == "__main__":
     df = pd.read_csv(path+'/data/external/books.csv', index_col=0)
     print('Book dataframe size:',df.shape)
 
-    # insert_db(df, 'books', engine)
+    insert_db(df, 'books', engine)
 
     print('insert_db done')
 
