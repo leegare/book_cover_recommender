@@ -32,8 +32,8 @@ if __name__ == "__main__":
     data = df.head(10).copy()
 
     # Get cover images
-    # start = time()
-    os.chdir(path+'/data/raw/covers')
+    # staroot = time()
+    os.chdir(path+'data/raw/covers')
     data['cover'] = data.apply(lambda row: get_cover(row), axis=1)
     print('downloading', data.shape[0], 'book covers')
 
