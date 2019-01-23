@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from myfunk import * #get_cover, insert_db
 import pandas as pd
+import os
 from time import time
 import warnings
 warnings.filterwarnings('ignore')
