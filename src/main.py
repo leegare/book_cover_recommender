@@ -35,7 +35,7 @@ if __name__ == "__main__":
     # start = time()
     os.chdir(path+'/data/raw/covers')
     data['cover'] = data.apply(lambda row: get_cover(row), axis=1)
-    # print(time()-start, 's downloading', data.shape[0], 'book covers')
+    print('downloading', data.shape[0], 'book covers')
 
     # insert_db(data, 'books_subset', engine)
 
