@@ -19,24 +19,24 @@ if __name__ == "__main__":
     try:
         # Engine: common interface to the database from SQLAlchemy
         # Connect to sql_books instance
-        engine = create_engine('postgresql://postgres:capstone@35.197.77.78:5432/postgres')
-        print("Database found.")
+        engine = create_engine('postgresql://postgres:capstone@35.197.77.78:5432/postgres', echo='debug')
+        print("Database found.", type(engine))
     except:
         print("No database available.")
         quit()
 
     # Get book listings
     df = pd.read_csv(path+'data/external/books.csv', index_col=0)
-    df2 = pd.read_csv(path+'data/external/ratings.csv', index_col=0)
-    df3 = pd.read_csv(path+'data/external/to_read.csv', index_col=0)
-    df4 = pd.read_csv(path+'data/external/tags.csv', index_col=0)
-    df5 = pd.read_csv(path+'data/external/book_tags.csv', index_col=0)
+    # df2 = pd.read_csv(path+'data/external/ratings.csv', index_col=0)
+    # df3 = pd.read_csv(path+'data/external/to_read.csv', index_col=0)
+    # df4 = pd.read_csv(path+'data/external/tags.csv', index_col=0)
+    # df5 = pd.read_csv(path+'data/external/book_tags.csv', index_col=0)
 
     insert_db(df, 'books', engine)
-    insert_db(df2, 'ratings', engine)
-    insert_db(df3, 'to_read', engine)
-    insert_db(df4, 'tags', engine)
-    insert_db(df5, 'book_tags', engine)
+    # insert_db(df2, 'ratings', engine)
+    # insert_db(df3, 'to_read', engine)
+    # insert_db(df4, 'tags', engine)
+    # insert_db(df5, 'book_tags', engine)
 
     print('insert_db done')
 
@@ -45,22 +45,14 @@ if __name__ == "__main__":
 
     # Get cover images
 
-    # start = time()
-
     os.chdir(path+'data')
     try:
         os.mkdir('covers')
     except:
         pass
-    # ensure_directory('./data/covers/')
     os.chdir(path+'data/covers')
-
+    start = time()
     data['cover'] = data.apply(lambda row: get_cover(row), axis=1)
-    print('Downloaded', data.shape[0], 'book covers')
-
-    # insert_db(data, 'books_subset', engine)
-
-
-
+    print('Downloaded', data.shape[0], 'book covers in', time()-start)
 
     print('Program complete')
