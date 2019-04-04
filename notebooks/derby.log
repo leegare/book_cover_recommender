@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Jan 31 11:19:29 PST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0168-a55a-0dc9-000005495460 
+on database directory /Users/iZbra1/Documents/K2DS/Projects/book_cover_recommender/notebooks/metastore_db with class loader sun.misc.Launcher$AppClassLoader@36aa7bc2 
+Loaded from file:/Users/iZbra1/spark-2.4.0-bin-hadoop2.7/jars/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_45-b14
+user.dir=/Users/iZbra1/Documents/K2DS/Projects/book_cover_recommender/notebooks
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.14.3
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

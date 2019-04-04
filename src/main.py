@@ -12,7 +12,7 @@ def ensure_directory(path):
 
 if __name__ == "__main__":
     print("Welcome to book cover recommender.")
-    path = os.getcwd()[:-3]
+    path = os.getcwd()[:-3]  # Assuming it's on the src folder
     print('Path: ',path+'data','\n',os.listdir(path+'data'))
 
     # Initialize database connection
@@ -25,19 +25,29 @@ if __name__ == "__main__":
         print("No database available.")
         quit()
 
-    # Get book listings
-    df = pd.read_csv(path+'data/external/books.csv', index_col=0)
-    # df2 = pd.read_csv(path+'data/external/ratings.csv', index_col=0)
-    # df3 = pd.read_csv(path+'data/external/to_read.csv', index_col=0)
-    # df4 = pd.read_csv(path+'data/external/tags.csv', index_col=0)
-    # df5 = pd.read_csv(path+'data/external/book_tags.csv', index_col=0)
+## ----  Web scraping:
+    # Get the data from goodbooks-10k.git
+    download_data_from_goodbooks(path)
 
+## --- Preprocessing
+    preprocess_goodbooks(path)
+
+## ----- Upload the csv files
+    df = pd.read_csv(path+'data/raw/books.csv', index_col=0)
     insert_db(df, 'books', engine)
-    # insert_db(df2, 'ratings', engine)
-    # insert_db(df3, 'to_read', engine)
-    # insert_db(df4, 'tags', engine)
-    # insert_db(df5, 'book_tags', engine)
-
+    print('Uploaded: books')
+    df2 = pd.read_csv(path+'data/external/ratings.csv', index_col=0)
+    insert_db(df2, 'ratings', engine)
+    print('Uploaded: ratings')
+    df3 = pd.read_csv(path+'data/external/to_read.csv', index_col=0)
+    insert_db(df3, 'to_read', engine)
+    print('Uploaded: to_read')
+    df4 = pd.read_csv(path+'data/external/tags.csv', index_col=0)
+    insert_db(df4, 'tags', engine)
+    print('Uploaded: tags')
+    df5 = pd.read_csv(path+'data/external/book_tags.csv', index_col=0)
+    insert_db(df5, 'book_tags', engine)
+    print('Uploaded: book tags')
     print('insert_db done')
 
     # Subset
