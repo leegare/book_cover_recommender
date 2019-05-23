@@ -31,12 +31,6 @@ def cover_resize(image_files, width=98, height=149):
         img = img.resize((width, height), Image.ANTIALIAS)
         img.save(cover)
 
-def remove_cover_images(img):
-    '''Receives a list of image filenames
-    and removes the files in storage'''
-    for i in img:
-        os.remove(i)
-
 def preprocess(img):
     '''Function that gets an image filename, loads it and preprocess it:
         - Converts it to grayscale
@@ -145,7 +139,7 @@ def remove_dupes(df, duplicates):
     in data/processed'''
 
     dupes = []
-    # Comb the duplicates
+    # Comb the duplicates and get the unique titles
     for file_names in duplicates:
         if file_names[0] not in dupes:
             dupes.append(file_names[0])
@@ -153,7 +147,7 @@ def remove_dupes(df, duplicates):
         if file_names[1] not in dupes:
             dupes.append(file_names[1])
 
-        # Delete cover
+    # Delete cover
     for dupe in dupes:
         if os.path.exists(dupe):
             os.remove(dupe)
@@ -205,7 +199,10 @@ def download_data_from_goodbooks(path):
 # Remove goodbooks folder
     shutil.rmtree(os.getcwd())
     print("Files downloaded: ",os.listdir(path+"/data/external"))
-
+# Make the data tree folder
+    os.mkdir(path + '/data/raw')
+    os.mkdir(path + '/data/interim')
+    os.mkdir(path + '/data/processed')
 
 def preprocess_goodbooks(path):
     '''Preps and cleans the external csv files:
@@ -269,10 +266,14 @@ def preprocess_goodbooks(path):
     df.to_csv(path+'/data/raw/books.csv')
     print("Preprocessed", df.shape[0], 'books')
 
+    # Get the book id's that remain
+    books_available = df.index.values
+
+
 ## ---- book_tags.csv
     df = pd.read_csv(path+'/data/external/book_tags.csv')
     df.rename(columns={'goodreads_book_id':'book_id'}, inplace=True)
-    df.set_index('book_id', inplace=True)
+    df = df.loc[df.book_id.isin(books_available)]
 
     # Save file
     df.to_csv(path+'/data/raw/book_tags.csv')
@@ -280,7 +281,17 @@ def preprocess_goodbooks(path):
 
 ## --- tags.csv
     copyfile(path+'/data/external/tags.csv', path+'/data/raw/tags.csv')
+
 ## --- ratings.csv
-    copyfile(path+'/data/external/ratings.csv', path+'/data/raw/ratings.csv')
+    df = pd.read_csv(path + '/data/external/ratings.csv')
+    df = df.loc[df.book_id.isin(books_available)]
+    # Save file
+    df.to_csv(path + '/data/raw/ratings.csv')
+    print("Preprocessed", df.shape[0], 'ratings')
+
 ## --- to_read.csv
-    copyfile(path+'/data/external/to_read.csv', path+'/data/raw/to_read.csv')
+    df = pd.read_csv(path + '/data/external/to_read.csv')
+    df = df.loc[df.book_id.isin(books_available)]
+
+    # Save file
+    df.to_csv(path+'/data/raw/to_read.csv')

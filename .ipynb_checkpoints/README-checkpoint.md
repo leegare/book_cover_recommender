@@ -1,4 +1,4 @@
-# book_cover_recommender
+# Book Cover Recommender:
 #### Capstone project ~ Work in Progress
 
 ## Introduction
@@ -7,20 +7,22 @@ In average the reader will base their purchase decision by looking at the cover 
 
 In this project I will analyze over 10,000 book covers from a public database to detect the underlying patterns that can be learnt from the reader. Then, use this information to build a recommender system based solely on the book's cover and see if judging a book by its cover isn't a sin after all.  
 
-## The dataset
+## The repository:
 
-
-
-## This repo:
-
+In the Data folder: 
+- External: Contains the csv files downloaded from the github repo **[3]**:
+    - Books.csv: book_id, isbn, authors, year, title and average_rating
+    - Ratings.csv: User_id, Book_id, Rating. 
+    - Book_tags: Book_id, tag_id, count
+    - Tags.csv: Tag_id, tag_name
+    - To_read.csv: User_id, Book_id 
+- Interim: Contains the csv files ready to be preprocessed. 
+- Processed: Contains the csv files and covers ready to be analyzed. 
+    
 In the notebooks folder:
-1. **data_collection.ipynb**: Extracts the csv files from the github repo **[3]**. 
-    - It contains the following files:
-        - Books.csv: book_id, isbn, authors, year, title and average_rating
-        - Ratings.csv: User_id, Book_id, Rating. 
-        - Book_tags: Book_id, tag_id, count
-        - Tags.csv: Tag_id, tag_name
-        - To_read.csv: User_id, Book_id 
+1. **data_collection.ipynb**: 
+    - Extracts the csv files from the github repo. 
+    - I will use two of them: The books table and the ratings table.
     - The files are then stored in the data/external folder.
     
 2. **preprocessing.ipynb**: 
@@ -31,10 +33,8 @@ In the notebooks folder:
     - Defines a hash metric to be compared within the image covers. 
     - Builds the recommender system. 
 
+## The dataset
 
-In the Data folder: 
-    - /Interim: Contains the csv files ready to be preprocessed. 
-    - /Processed: Contains the csv files and covers ready to be analyzed. 
 
 ## Preprocessing
 
